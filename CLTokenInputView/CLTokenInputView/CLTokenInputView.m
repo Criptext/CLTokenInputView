@@ -11,9 +11,9 @@
 #import "CLBackspaceDetectingTextField.h"
 #import "CLTokenView.h"
 
-static CGFloat const HSPACE = 0.0;
+static CGFloat const HSPACE = 5.0;
 static CGFloat const TEXT_FIELD_HSPACE = 4.0; // Note: Same as CLTokenView.PADDING_X
-static CGFloat const VSPACE = 4.0;
+static CGFloat const VSPACE = 12.0;
 static CGFloat const MINIMUM_TEXTFIELD_WIDTH = 56.0;
 static CGFloat const PADDING_TOP = 10.0;
 static CGFloat const PADDING_BOTTOM = 10.0;
@@ -114,13 +114,11 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
     }
 
     [self.tokens addObject:token];
-    CLTokenView *tokenView = [[CLTokenView alloc] initWithToken:token font:self.textField.font];
-    if ([self respondsToSelector:@selector(tintColor)]) {
-        tokenView.tintColor = self.tintColor;
-    }
+    CLTokenView *tokenView = [[CLTokenView alloc] initWithToken:token font:self.textField.font domain:@"criptext.com"];
+    
     tokenView.delegate = self;
     CGSize intrinsicSize = tokenView.intrinsicContentSize;
-    tokenView.frame = CGRectMake(0, 0, intrinsicSize.width, intrinsicSize.height);
+    tokenView.frame = CGRectMake(0, 0, intrinsicSize.width, intrinsicSize.height + 10);
     [self.tokenViews addObject:tokenView];
     [self addSubview:tokenView];
     self.textField.text = @"";
@@ -329,7 +327,7 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
     if ([self.delegate respondsToSelector:@selector(tokenInputViewDidBeginEditing:)]) {
         [self.delegate tokenInputViewDidBeginEditing:self];
     }
-    self.tokenViews.lastObject.hideUnselectedComma = NO;
+    //self.tokenViews.lastObject.hideUnselectedComma = NO;
     [self unselectAllTokenViewsAnimated:YES];
 }
 
@@ -338,7 +336,7 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
     if ([self.delegate respondsToSelector:@selector(tokenInputViewDidEndEditing:)]) {
         [self.delegate tokenInputViewDidEndEditing:self];
     }
-    self.tokenViews.lastObject.hideUnselectedComma = YES;
+    //self.tokenViews.lastObject.hideUnselectedComma = YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

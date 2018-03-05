@@ -160,7 +160,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     NSString *name = self.filteredNames[indexPath.row];
-    CLToken *token = [[CLToken alloc] initWithDisplayText:name context:nil];
+    CLToken *token = [[CLToken alloc] initWithDisplayText:name context:@"daniel@criptext.com"];
     if (self.tokenInputView.isEditing) {
         [self.tokenInputView addToken:token];
     }

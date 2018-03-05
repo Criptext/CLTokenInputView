@@ -10,59 +10,75 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-static CGFloat const PADDING_X = 4.0;
+static CGFloat const PADDING_X = 12.0;
 static CGFloat const PADDING_Y = 2.0;
 
 static NSString *const UNSELECTED_LABEL_FORMAT = @"%@,";
 static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
-
 
 @interface CLTokenView ()
 
 @property (strong, nonatomic) UIView *backgroundView;
 @property (strong, nonatomic) UILabel *label;
 
+@property (strong, nonatomic) UIView *normalBackgroundView;
 @property (strong, nonatomic) UIView *selectedBackgroundView;
 @property (strong, nonatomic) UILabel *selectedLabel;
 
 @property (copy, nonatomic) NSString *displayText;
+@property (copy, nonatomic) NSString *context;
+
+@property (copy, nonatomic) UIColor *normalTextColor;
+@property (copy, nonatomic) UIColor *externalTextColor;
+@property (copy, nonatomic) UIColor *selectedTextColor;
 
 @end
 
 @implementation CLTokenView
 
-- (id)initWithToken:(CLToken *)token font:(nullable UIFont *)font
+- (id)initWithToken:(CLToken *)token font:(nullable UIFont *)font domain:(NSString *)domain
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
-        UIColor *tintColor = [UIColor colorWithRed:0.0823 green:0.4941 blue:0.9843 alpha:1.0];
-        if ([self respondsToSelector:@selector(tintColor)]) {
-            tintColor = self.tintColor;
+        
+        self.mainDomain = domain;
+        self.normalTextColor = [UIColor colorWithRed:0 green:0.23 blue:0.41 alpha:1.0];
+        self.externalTextColor = [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1.0];
+        self.selectedTextColor = [UIColor whiteColor];
+        
+        self.normalBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+        self.normalBackgroundView.backgroundColor = [UIColor colorWithRed:0.90 green:0.96 blue:1 alpha:1.0];
+        if([[[NSString alloc] initWithFormat:@"%@",token.context] rangeOfString:self.mainDomain].length == 0){
+            self.normalBackgroundView.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
         }
+        self.normalBackgroundView.layer.cornerRadius = 16.0;
+        [self addSubview:self.normalBackgroundView];
+        
         self.label = [[UILabel alloc] initWithFrame:CGRectMake(PADDING_X, PADDING_Y, 0, 0)];
         if (font) {
             self.label.font = font;
         }
-        self.label.textColor = tintColor;
+        self.label.textColor = self.normalTextColor;
         self.label.backgroundColor = [UIColor clearColor];
         [self addSubview:self.label];
-
+        
         self.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
-        self.selectedBackgroundView.backgroundColor = tintColor;
-        self.selectedBackgroundView.layer.cornerRadius = 3.0;
+        self.selectedBackgroundView.backgroundColor = self.tintColor;
+        self.selectedBackgroundView.layer.cornerRadius = 16.0;
         [self addSubview:self.selectedBackgroundView];
         self.selectedBackgroundView.hidden = YES;
 
         self.selectedLabel = [[UILabel alloc] initWithFrame:CGRectMake(PADDING_X, PADDING_Y, 0, 0)];
         self.selectedLabel.font = self.label.font;
-        self.selectedLabel.textColor = [UIColor whiteColor];
+        self.selectedLabel.textColor = self.selectedTextColor;
         self.selectedLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.selectedLabel];
         self.selectedLabel.hidden = YES;
 
         self.displayText = token.displayText;
+        self.context = [[NSString alloc] initWithFormat:@"%@",token.context];
 
-        self.hideUnselectedComma = NO;
+        self.hideUnselectedComma = YES;
 
         [self updateLabelAttributedText];
         self.selectedLabel.text = token.displayText;
@@ -187,11 +203,15 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
                                            attributes:@{NSFontAttributeName : self.label.font,
                                                         NSForegroundColorAttributeName : [UIColor lightGrayColor]}];
     NSRange tintRange = [labelString rangeOfString:self.displayText];
-    // Make the name part the system tint color
-    UIColor *tintColor = self.selectedBackgroundView.backgroundColor;
-    if ([UIView instancesRespondToSelector:@selector(tintColor)]) {
-        tintColor = self.tintColor;
+    
+    UIColor *tintColor = self.normalTextColor;
+    if([self.context rangeOfString:self.mainDomain].length == 0){
+        tintColor = self.externalTextColor;
     }
+    else if(_selected){
+        tintColor = self.selectedTextColor;
+    }
+    
     [attrString setAttributes:@{NSForegroundColorAttributeName : tintColor}
                         range:tintRange];
     self.label.attributedText = attrString;
@@ -208,6 +228,7 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
 
     self.backgroundView.frame = bounds;
     self.selectedBackgroundView.frame = bounds;
+    self.normalBackgroundView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height);
 
     CGRect labelFrame = CGRectInset(bounds, PADDING_X, PADDING_Y);
     self.selectedLabel.frame = labelFrame;
@@ -274,6 +295,5 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
     [self setSelected:YES animated:NO];
     return didBecomeFirstResponder;
 }
-
 
 @end
