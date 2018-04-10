@@ -67,28 +67,28 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
         self.selectedBackgroundView.layer.cornerRadius = 16.0;
         [self addSubview:self.selectedBackgroundView];
         self.selectedBackgroundView.hidden = YES;
-
+        
         self.selectedLabel = [[UILabel alloc] initWithFrame:CGRectMake(PADDING_X, PADDING_Y, 0, 0)];
         self.selectedLabel.font = self.label.font;
         self.selectedLabel.textColor = self.selectedTextColor;
         self.selectedLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:self.selectedLabel];
         self.selectedLabel.hidden = YES;
-
+        
         self.displayText = token.displayText;
         self.context = [[NSString alloc] initWithFormat:@"%@",token.context];
-
+        
         self.hideUnselectedComma = YES;
-
+        
         [self updateLabelAttributedText];
         self.selectedLabel.text = token.displayText;
-
+        
         // Listen for taps
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGestureRecognizer:)];
         [self addGestureRecognizer:tapRecognizer];
-
+        
         [self setNeedsLayout];
-
+        
     }
     return self;
 }
@@ -157,7 +157,7 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
         return;
     }
     _selected = selected;
-
+    
     if (selected && !self.isFirstResponder) {
         [self becomeFirstResponder];
     } else if (!selected && self.isFirstResponder) {
@@ -175,7 +175,7 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
             self.selectedBackgroundView.alpha = selectedAlpha;
             self.selectedLabel.alpha = selectedAlpha;
         } completion:^(BOOL finished) {
-            if (!_selected) {
+            if (!self->_selected) {
                 self.selectedBackgroundView.hidden = YES;
                 self.selectedLabel.hidden = YES;
             }
@@ -223,13 +223,13 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-
+    
     CGRect bounds = self.bounds;
-
+    
     self.backgroundView.frame = bounds;
     self.selectedBackgroundView.frame = bounds;
     self.normalBackgroundView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height);
-
+    
     CGRect labelFrame = CGRectInset(bounds, PADDING_X, PADDING_Y);
     self.selectedLabel.frame = labelFrame;
     labelFrame.size.width += PADDING_X*2.0;
@@ -237,13 +237,13 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect
+ {
+ // Drawing code
+ }
+ */
 
 
 #pragma mark - UIKeyInput protocol

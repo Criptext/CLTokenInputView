@@ -1,15 +1,15 @@
 //
-//  CLTokenInputViewFrameworkTests.swift
-//  CLTokenInputViewFrameworkTests
+//  CLTokenInputViewTests.swift
+//  CLTokenInputViewTests
 //
-//  Created by Gianni Carlo on 4/5/18.
-//  Copyright © 2018 Cluster Labs, Inc. All rights reserved.
+//  Created by Gianni Carlo on 4/9/18.
+//  Copyright © 2018 Criptext Inc. All rights reserved.
 //
 
 import XCTest
-@testable import CLTokenInputViewFramework
+@testable import CLTokenInputView
 
-class CLTokenInputViewFrameworkTests: XCTestCase {
+class CLTokenInputViewTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

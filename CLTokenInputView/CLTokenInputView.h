@@ -2,11 +2,19 @@
 //  CLTokenInputView.h
 //  CLTokenInputView
 //
-//  Created by Rizwan Sattar on 2/24/14.
-//  Copyright (c) 2014 Cluster Labs, Inc. All rights reserved.
+//  Created by Gianni Carlo on 4/9/18.
+//  Copyright © 2018 Criptext Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
+//! Project version number for CLTokenInputView.
+FOUNDATION_EXPORT double CLTokenInputViewVersionNumber;
+
+//! Project version string for CLTokenInputView.
+FOUNDATION_EXPORT const unsigned char CLTokenInputViewVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <CLTokenInputView/PublicHeader.h>
 
 #import "CLToken.h"
 
@@ -56,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  * Called when a token has been removed. You should use this opportunity to update your local list of selected items.
  */
 - (void)tokenInputView:(CLTokenInputView *)view didRemoveToken:(CLToken *)token;
-/** 
+/**
  * Called when the user attempts to press the Return key with text partially typed.
  * @return A CLToken for a match (typically the first item in the matching results),
  * or nil if the text shouldn't be accepted.
@@ -86,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic) IBInspectable UITextAutocapitalizationType autocapitalizationType;
 @property (assign, nonatomic) IBInspectable UITextAutocorrectionType autocorrectionType;
 @property (assign, nonatomic) IBInspectable UIKeyboardAppearance keyboardAppearance;
-/** 
+/**
  * Optional additional characters to trigger the tokenization process (and call the delegate
  * with `tokenInputView:tokenForText:`
  * @discussion By default this array is empty, as only the Return key will trigger tokenization
