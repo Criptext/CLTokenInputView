@@ -13,7 +13,7 @@
 		4101953D207C456A006A9398 /* CLTokenInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4101953C207C456A006A9398 /* CLTokenInputView.m */; };
 		41019540207C458D006A9398 /* CLTokenView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4101953E207C458D006A9398 /* CLTokenView.h */; };
 		41019541207C458D006A9398 /* CLTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4101953F207C458D006A9398 /* CLTokenView.m */; };
-		41019544207C45B1006A9398 /* CLToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 41019542207C45B1006A9398 /* CLToken.h */; };
+		41019544207C45B1006A9398 /* CLToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 41019542207C45B1006A9398 /* CLToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		41019545207C45B1006A9398 /* CLToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 41019543207C45B1006A9398 /* CLToken.m */; };
 		41019548207C45DD006A9398 /* CLBackspaceDetectingTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 41019546207C45DD006A9398 /* CLBackspaceDetectingTextField.h */; };
 		41019549207C45DD006A9398 /* CLBackspaceDetectingTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 41019547207C45DD006A9398 /* CLBackspaceDetectingTextField.m */; };

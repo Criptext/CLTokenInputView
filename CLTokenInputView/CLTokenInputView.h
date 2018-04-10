@@ -16,7 +16,7 @@ FOUNDATION_EXPORT const unsigned char CLTokenInputViewVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <CLTokenInputView/PublicHeader.h>
 
-#import "CLToken.h"
+#import <CLTokenInputView/CLToken.h>
 
 #if __has_feature(objc_generics)
 #define CL_GENERIC_ARRAY(type) NSArray<type>
