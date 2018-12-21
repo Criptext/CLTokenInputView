@@ -420,6 +420,10 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
 -(void) setText:(NSString*)text {
     self.textField.text = text;
 }
+    
+-(void) setTextColor:(UIColor*)color {
+    self.textField.textColor = color;
+}
 
 #pragma mark - CLTokenViewDelegate
 
