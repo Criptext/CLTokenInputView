@@ -172,7 +172,7 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
         [self.delegate respondsToSelector:@selector(tokenInputView:tokenForText:)]) {
         token = [self.delegate tokenInputView:self tokenForText:text];
         if (token != nil) {
-            [self addToken:token];
+            [self addToken:token highlight:NULL background:NULL];
             self.textField.text = @"";
             [self onTextFieldDidChange:self.textField];
         }

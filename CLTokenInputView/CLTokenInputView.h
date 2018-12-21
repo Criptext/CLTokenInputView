@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) CGFloat textFieldDisplayOffset;
 @property (copy, nonatomic, nullable) NSString *text;
 
-- (void)addToken:(CLToken *)token;
+- (void)addToken:(CLToken *)token highlight:(nullable UIColor *)color background:(nullable UIColor *)backgroundColor;
 - (void)removeToken:(CLToken *)token;
 - (nullable CLToken *)tokenizeTextfieldText;
 
