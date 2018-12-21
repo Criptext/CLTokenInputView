@@ -107,14 +107,14 @@ static CGFloat const FIELD_MARGIN_X = 4.0; // Note: Same as CLTokenView.PADDING_
 
 #pragma mark - Adding / Removing Tokens
 
-- (void)addToken:(CLToken *)token
+- (void)addToken:(CLToken *)token highlight:(nullable UIColor *)color background:(nullable UIColor *)backgroundColor
 {
     if ([self.tokens containsObject:token]) {
         return;
     }
     
     [self.tokens addObject:token];
-    CLTokenView *tokenView = [[CLTokenView alloc] initWithToken:token font:self.textField.font domain:@"criptext.com"];
+    CLTokenView *tokenView = [[CLTokenView alloc] initWithToken:token font:self.textField.font color:color backgroundColor:backgroundColor];
     
     tokenView.delegate = self;
     CGSize intrinsicSize = tokenView.intrinsicContentSize;

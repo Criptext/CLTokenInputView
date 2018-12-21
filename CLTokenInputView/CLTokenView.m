@@ -29,27 +29,28 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
 @property (copy, nonatomic) NSString *context;
 
 @property (copy, nonatomic) UIColor *normalTextColor;
-@property (copy, nonatomic) UIColor *externalTextColor;
 @property (copy, nonatomic) UIColor *selectedTextColor;
 
 @end
 
 @implementation CLTokenView
 
-- (id)initWithToken:(CLToken *)token font:(nullable UIFont *)font domain:(NSString *)domain
+- (id)initWithToken:(CLToken *)token font:(nullable UIFont *)font color:(nullable UIColor *)color backgroundColor:(nullable UIColor *)backgroundColor
 {
     self = [super initWithFrame:CGRectZero];
     if (self) {
         
-        self.mainDomain = domain;
         self.normalTextColor = [UIColor colorWithRed:0 green:0.23 blue:0.41 alpha:1.0];
-        self.externalTextColor = [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1.0];
+        //self.externalTextColor = [UIColor colorWithRed:0.13 green:0.13 blue:0.13 alpha:1.0];
         self.selectedTextColor = [UIColor whiteColor];
         
         self.normalBackgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         self.normalBackgroundView.backgroundColor = [UIColor colorWithRed:0.90 green:0.96 blue:1 alpha:1.0];
-        if([[[NSString alloc] initWithFormat:@"%@",token.context] rangeOfString:self.mainDomain].length == 0){
-            self.normalBackgroundView.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0];
+        if(backgroundColor != NULL){
+            self.normalBackgroundView.backgroundColor = backgroundColor;
+        }
+        if(color != NULL){
+            self.normalTextColor = color;
         }
         self.normalBackgroundView.layer.cornerRadius = 16.0;
         [self addSubview:self.normalBackgroundView];
@@ -205,10 +206,7 @@ static NSString *const UNSELECTED_LABEL_NO_COMMA_FORMAT = @"%@";
     NSRange tintRange = [labelString rangeOfString:self.displayText];
     
     UIColor *tintColor = self.normalTextColor;
-    if([self.context rangeOfString:self.mainDomain].length == 0){
-        tintColor = self.externalTextColor;
-    }
-    else if(_selected){
+    if(_selected){
         tintColor = self.selectedTextColor;
     }
     
