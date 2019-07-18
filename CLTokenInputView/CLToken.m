@@ -28,7 +28,7 @@
     if (![object isKindOfClass:[CLToken class]]) {
         return NO;
     }
-
+    
     CLToken *otherObject = (CLToken *)object;
     if ([otherObject.displayText isEqualToString:self.displayText] &&
         [otherObject.context isEqual:self.context]) {

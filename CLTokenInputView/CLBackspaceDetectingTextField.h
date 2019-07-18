@@ -19,10 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * CLBackspaceDetectingTextField is a very simple subclass
- * of UITextField that adds an extra delegate method to 
+ * of UITextField that adds an extra delegate method to
  * notify whenever the backspace key is pressed. Without
  * this delegate method, it is not possible to detect
- * if the backspace key is pressed while the textfield is 
+ * if the backspace key is pressed while the textfield is
  * empty.
  *
  * @since v1.0
